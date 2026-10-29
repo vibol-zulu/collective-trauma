@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Collective Trauma</title>
+  <link rel="stylesheet" href="./design-system.css" />
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: var(--color-paper); font-family: var(--font-body); font-weight: 300; color: var(--text); }
+    canvas { display: block; touch-action: none; }
+    #status { position: fixed; inset: 0; display: grid; place-items: center; color: var(--text); font-size: 15px; }
+    #help {
+      position: fixed; left: 16px; bottom: 16px; color: var(--text); font-size: 13px; line-height: 1.6;
+      background: rgba(255,255,255,0.45); padding: 8px 12px; border-radius: 8px; pointer-events: none;
+    }
+    #look-hint {
+      position: fixed; left: 16px; top: 16px; color: var(--text); font-size: 13px;
+      background: rgba(255,255,255,0.6); padding: 6px 12px; border-radius: 8px; pointer-events: none;
+    }
+    /* Mouse in control: a small reminder top left. Mouse free: a button in the centre. */
+    body.cursor-free #look-hint { display: none; }
+    #enter {
+      position: fixed; inset: 0; display: grid; place-items: center; cursor: pointer;
+      background: rgba(255, 255, 250, 0.72); opacity: 0; pointer-events: none; transition: opacity 0.35s ease;
+    }
+    body.cursor-free #enter { opacity: 1; pointer-events: auto; }
+    #reticle {
+      position: fixed; left: 50%; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%;
+      background: rgba(0,86,74,0.5); pointer-events: none;
+    }
+    body.cursor-free #reticle { display: none; }
+    #fade {
+      position: fixed; inset: 0; background: #fffffa; opacity: 0; pointer-events: none;
+      transition: opacity 1.2s ease;
+    }
+    #fade.on { opacity: 1; }
+    #end {
+      position: fixed; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px;
+      text-align: center; opacity: 0; pointer-events: none; transition: opacity 0.8s ease;
+    }
+    #end.on { opacity: 1; pointer-events: auto; }
+    #end p { margin: 0; font-size: 15px; }
+    #end .ds-button { margin-top: 10px; }
+    /* Hidden from the moment the doorway fade starts (the pointer is released then) */
+    body:has(#fade.on) #enter, body:has(#fade.on) #look-hint, body:has(#fade.on) #help { display: none; }
+    #start {
+      position: fixed; inset: 0; display: grid; place-content: center; text-align: center; gap: 14px;
+      background: radial-gradient(ellipse 60% 34% at 50% 50%, rgba(255,255,250,0.9) 0%, rgba(255,255,250,0.55) 55%, rgba(255,255,250,0) 100%); color: var(--text); transition: opacity 0.6s ease; justify-items: center;
+    }
+    /* Two equal-width buttons side by side (stacked on narrow screens) */
+    #start .start-buttons { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    #start .start-buttons .ds-button { width: 100%; }
+    #start .start-buttons.single { grid-template-columns: 1fr; }
+    @media (max-width: 480px) { #start .start-buttons { grid-template-columns: 1fr; } }
+    #start.hidden { opacity: 0; pointer-events: none; }
+    body:has(#status) #look-hint, body:has(#status) #help,
+    body:has(#start:not(.hidden)) #look-hint,
+    body:has(#start:not(.hidden)) #help { opacity: 0; }
+    body:has(#status) #enter, body:has(#start:not(.hidden)) #enter, body.entering #enter { display: none; }
+    #help, #look-hint { transition: opacity 0.6s ease; }
+    /* Sound toggle, bottom right; above the "Click to enter" veil so it can be clicked there too */
+    #sound[hidden] { display: none; }
+    #sound { position: fixed; right: 16px; bottom: 16px; z-index: 6; padding: 8px 14px; font-size: 13px; transition: opacity 0.6s ease; }
+    body:has(#status) #sound, body:has(#start:not(.hidden)) #sound { opacity: 0; pointer-events: none; }
+  </style>
+  <script type="module" crossorigin src="./assets/wound-C9_VtrCh.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/controls-CJcLrG6O.js">
+</head>
+<body>
+  <div id="status">Loading character…</div>
+  <div id="look-hint">Escape to exit</div>
+  <div id="enter" data-lock-pointer><button class="ds-button" type="button">Click to enter</button></div>
+  <div id="help"></div>
+  <div id="start" class="hidden"><h1 class="ds-title">The Invisible Wound</h1><div class="start-buttons single"><button class="ds-button" type="button" data-mode="full">Begin</button></div></div>
+  <div id="fade"></div>
+  <div id="end"><h1 class="ds-title">End of the beat 1 test</h1><p id="end-points"></p><button class="ds-button" type="button">Begin again</button></div>
+</body>
+</html>
