@@ -1,0 +1,31 @@
+/* Brand fonts: Lydian for titles, Post Grotesk for subtitles and body text. */
+@font-face {
+  font-family: 'Lydian';
+  src: url('lydian-mt-std-regular.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Post Grotesk';
+  src: url('PostGrotesk-Light.otf') format('opentype');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Post Grotesk';
+  src: url('PostGrotesk-Book.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Post Grotesk';
+  src: url('PostGrotesk-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Post Grotesk';
+  src: url('PostGrotesk-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-display: swap;
+}

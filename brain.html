@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Brain's Alarm System — Inherited Wounds</title>
+  <link rel="stylesheet" href="./design-system.css" />
+  <style>
+    html, body {
+      margin: 0; height: 100%; overflow: hidden; background: #17141b;
+      font-family: var(--font-body); font-weight: 300; color: #ffd5c8;
+    }
+    canvas { display: block; touch-action: none; }
+    #status { position: fixed; inset: 0; display: grid; place-items: center; color: #ffd5c8; font-size: 15px; }
+    #look-hint {
+      position: fixed; left: 16px; top: 16px; color: rgba(255, 213, 200, 0.8); font-size: 13px;
+      background: rgba(23, 20, 27, 0.64); padding: 6px 12px; border-radius: 8px; pointer-events: none;
+    }
+    body.cursor-free #look-hint { display: none; }
+    #enter {
+      position: fixed; inset: 0; display: grid; place-items: center; cursor: pointer;
+      background: rgba(23, 20, 27, 0.72); opacity: 0; pointer-events: none; transition: opacity 0.35s ease;
+    }
+    body.cursor-free #enter { opacity: 1; pointer-events: auto; }
+    #start {
+      position: fixed; inset: 0; display: grid; place-content: center; justify-items: center; gap: 15px;
+      text-align: center; background: radial-gradient(ellipse 60% 38% at 50% 50%, rgba(23,20,27,0.96) 0%, rgba(23,20,27,0.76) 58%, rgba(23,20,27,0.15) 100%);
+      transition: opacity 0.6s ease;
+    }
+    #start .ds-title { color: #ffd5c8; max-width: 820px; }
+    #start p { max-width: 520px; margin: 0; color: rgba(255, 213, 200, 0.76); font-size: 15px; line-height: 1.5; }
+    #start .ds-button { margin-top: 10px; }
+    #start.hidden { opacity: 0; pointer-events: none; }
+    body:has(#status) #look-hint,
+    body:has(#start:not(.hidden)) #look-hint { opacity: 0; }
+    body:has(#status) #enter,
+    body:has(#start:not(.hidden)) #enter,
+    body.entering #enter { display: none; }
+    #look-hint { transition: opacity 0.6s ease; }
+    #credit {
+      position: fixed; right: 14px; bottom: 12px; color: rgba(255, 213, 200, 0.46);
+      font-size: 11px; text-decoration: none; z-index: 5;
+    }
+    #credit:hover, #credit:focus-visible { color: #ffd5c8; }
+  </style>
+  <script type="module" crossorigin src="./assets/brain-CsZlVF2N.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/lighting-CMDhC0NK.js">
+</head>
+<body>
+  <div id="status">Loading the brain sculpture…</div>
+  <div id="look-hint">Escape to exit</div>
+  <div id="enter" data-lock-pointer><button class="ds-button" type="button">Click to enter</button></div>
+  <div id="start" class="hidden">
+    <h1 class="ds-title">The Brain’s Alarm System</h1>
+    <p>Scene 3 environment study, still in development</p>
+    <button class="ds-button" type="button" data-mode="full">Begin</button>
+  </div>
+  <a id="credit" href="https://sketchfab.com/3d-models/limbic-system-ap-psychology-042b7c37263f4309bc8b4e18dc989102" target="_blank" rel="noreferrer">Limbic System by shojig · CC BY 4.0</a>
+</body>
+</html>
